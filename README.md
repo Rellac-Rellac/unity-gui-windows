@@ -1,6 +1,8 @@
 # unity-gui-windows
 Draggable and scalable modular Canvas based GUI windows
 
+![](gif_demo.gif)
+
 To quickly create a window from hierarchy panel: Create > UI > Window
 
 Draggable GUI Windows has been designed in a very modular way with ease of access for modifying both form and function.

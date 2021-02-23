@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Simple script to destroy the target GameObject when window is closed
-/// </summary>
-public class GUIWindow : MonoBehaviour {
+namespace Rellac.Windows
+{
 	/// <summary>
-	/// Close window by destroying this GameObject
+	/// Simple script to destroy the target GameObject when window is closed
 	/// </summary>
-	public void CloseWindow () {
-		Destroy(gameObject);
+	public class GUIWindow : MonoBehaviour
+	{
+		/// <summary>
+		/// Close window by destroying this GameObject
+		/// </summary>
+		public void CloseWindow()
+		{
+			Destroy(gameObject);
+		}
 	}
 }

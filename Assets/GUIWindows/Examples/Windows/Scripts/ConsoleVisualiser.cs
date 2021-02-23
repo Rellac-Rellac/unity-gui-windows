@@ -2,12 +2,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 public class ConsoleVisualiser : MonoBehaviour
 {
 	[SerializeField] private Transform textParent = null;
 	[SerializeField] private int textSize = 20;
 	[SerializeField] private int maxMessages = 10;
+
+	public UnityEvent onMessageRecieved;
 	
 	private Font messageFont;
 	private int currentNumMessages;
@@ -68,6 +70,8 @@ public class ConsoleVisualiser : MonoBehaviour
 			Destroy(textParent.GetChild(textParent.childCount-1).gameObject);
 			currentNumMessages--;
 		}
+
+		onMessageRecieved.Invoke ();
 		
 		yield return null;
 	}

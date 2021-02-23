@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class GUIWindowExpander : MonoBehaviour {
+public class GUIWindowExpander : GUIPointerObject {
 
 	private const float MaxTimeForDoubleClick = 0.5f;
 
@@ -27,6 +27,11 @@ public class GUIWindowExpander : MonoBehaviour {
 	private Vector2 targetSize;
 
 	private int numClicks;
+
+	void Start() {
+		onPointerDown.AddListener (parentWindow.SetAsLastSibling);
+		onPointerDown.AddListener (TryDoubleClick);
+	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -105,7 +110,7 @@ public class GUIWindowExpander : MonoBehaviour {
 		}
 	}
 
-	private void Swap () {
+	public void Swap () {
 		if (isMaximised) {
 			MinimiseWindow ();
 		} else {

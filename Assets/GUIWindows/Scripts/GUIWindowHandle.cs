@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class GUIWindowHandle : MonoBehaviour {
+public class GUIWindowHandle : GUIPointerObject {
 
 	[SerializeField] private RectTransform parentWindow = null;
 	[SerializeField] private bool isLocked = false;
@@ -21,6 +21,12 @@ public class GUIWindowHandle : MonoBehaviour {
 
 	void Start ()
 	{
+		//register to pointer events
+		onPointerDown.AddListener (SetIsGrabbed);
+		onPointerDown.AddListener (parentWindow.SetAsLastSibling);
+		onPointerEnter.AddListener (ShowCursor);
+		onPointerExit.AddListener (ResetCursor);
+
 		// find what direction we're pulling with this handle
 		switch (axis) {
 

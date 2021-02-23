@@ -2,13 +2,17 @@
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class GUIWindowMover : MonoBehaviour {
+public class GUIWindowMover : GUIPointerObject {
 
 	[SerializeField] private RectTransform parentWindow = null;
 	[SerializeField] private bool isLocked = false;
 	[SerializeField] private UnityEvent onWindowMoved = null;
 	private Vector2 mouseOffset;
 	private bool isGrabbed = false;
+
+	void Start() {
+		onPointerDown.AddListener (SetIsGrabbed);
+	}
 
 	void Update ()
 	{

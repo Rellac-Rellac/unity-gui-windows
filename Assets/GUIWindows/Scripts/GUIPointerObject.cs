@@ -3,10 +3,14 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class GUIPointerObject : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
-	[SerializeField] private UnityEvent onPointerUp = null;
-	[SerializeField] private UnityEvent onPointerDown = null;
-	[SerializeField] private UnityEvent onPointerEnter = null;
-	[SerializeField] private UnityEvent onPointerExit = null;
+	[HideInInspector]
+	public UnityEvent onPointerUp = null;
+	[HideInInspector]
+	public UnityEvent onPointerDown = null;
+	[HideInInspector]
+	public UnityEvent onPointerEnter = null;
+	[HideInInspector]
+	public UnityEvent onPointerExit = null;
 	public void OnPointerUp (PointerEventData eventData) {
 		if (onPointerUp != null) {
 			onPointerUp.Invoke();

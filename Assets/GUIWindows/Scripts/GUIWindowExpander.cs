@@ -83,6 +83,7 @@ public class GUIWindowExpander : GUIPointerObject {
 	/// <param name="input">is interactive</param>
 	public void SetIsLocked(bool input) {
 		isLocked = input;
+		parentWindow.SetAsLastSibling();
 	}
 
 	/// <summary>
@@ -104,6 +105,7 @@ public class GUIWindowExpander : GUIPointerObject {
 
 		isMaximised = true;
 		doAction = true;
+		parentWindow.SetAsLastSibling();
 	}
 
 	/// <summary>
@@ -125,12 +127,15 @@ public class GUIWindowExpander : GUIPointerObject {
 
 		isMaximised = false;
 		doAction = true;
+		parentWindow.SetAsLastSibling();
 	}
 
 	/// <summary>
 	/// Do a click for attempting to expand by double click
 	/// </summary>
-	public void TryDoubleClick () {
+	public void TryDoubleClick ()
+	{
+		parentWindow.SetAsLastSibling();
 		if (isLocked || !doubleClick) return;
 		numClicks++;
 		if (numClicks == 1) {

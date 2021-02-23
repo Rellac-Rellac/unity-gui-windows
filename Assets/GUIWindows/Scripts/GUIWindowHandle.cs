@@ -161,6 +161,7 @@ public class GUIWindowHandle : GUIPointerObject {
 	/// <param name="input">is interactive</param>
 	public void SetIsLocked (bool input) {
 		isLocked = input;
+		parentWindow.SetAsLastSibling();
 	}
 
 	/// <summary>
@@ -202,6 +203,7 @@ public class GUIWindowHandle : GUIPointerObject {
 			parentWindow.SetPivot(new Vector2(1,1));
 			break;
 		}
+		parentWindow.SetAsLastSibling();
 	}
 
 	/// <summary>

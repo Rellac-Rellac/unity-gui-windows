@@ -56,5 +56,6 @@ public class GUIWindowMover : GUIPointerObject {
 	public void SetIsGrabbed () {
 		mouseOffset = parentWindow.position - Input.mousePosition;
 		isGrabbed = true;
+		parentWindow.SetAsLastSibling();
 	}
 }

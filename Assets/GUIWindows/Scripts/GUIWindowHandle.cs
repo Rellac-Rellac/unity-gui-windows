@@ -1,16 +1,45 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// Script to handle pull handles to expand the windows
+/// </summary>
 public class GUIWindowHandle : GUIPointerObject {
-
+	/// <summary>
+	/// Window to apply pull effect to
+	/// </summary>
+	[Tooltip("Window to apply pull effect to")]
 	[SerializeField] private RectTransform parentWindow = null;
+	/// <summary>
+	/// Handle is locked and unusable
+	/// </summary>
+	[Tooltip("Handle is locked and unusable")]
 	[SerializeField] private bool isLocked = false;
-	public float minWidth = 50;
-	public float minHeight = 50;
+	/// <summary>
+	/// Minimum width parent window can be set to
+	/// </summary>
+	[Tooltip("Minimum width parent window can be set to")]
+	[SerializeField] private float minWidth = 50;
+	/// <summary>
+	/// Minimum height parent window can be set to
+	/// </summary>
+	[Tooltip("Minimum height parent window can be set to")]
+	[SerializeField] private float minHeight = 50;
+	/// <summary>
+	/// Sprite to show for cursor when this handle is highlighted
+	/// </summary>
+	[Tooltip("Sprite to show for cursor when this handle is highlighted")]
 	[SerializeField] private Texture2D cursor = null;
+	/// <summary>
+	/// Directional axis to pull window with this handle
+	/// </summary>
+	[Tooltip("Directional axis to pull window with this handle")]
 	[SerializeField] private Axis axis = Axis.Horizontal;
-	[SerializeField] private UnityEvent onWindowPulled = null;
+	/// <summary>
+	/// Fired when user pulls on the handle
+	/// </summary>
+	public UnityEvent onWindowPulled = null;
+
 	Direction direction;
 	private bool isGrabbed = false;
 
@@ -126,10 +155,17 @@ public class GUIWindowHandle : GUIPointerObject {
 		parentWindow.sizeDelta = size;
 	}
 
+	/// <summary>
+	/// Toggle interactivity of handle
+	/// </summary>
+	/// <param name="input">is interactive</param>
 	public void SetIsLocked (bool input) {
 		isLocked = input;
 	}
 
+	/// <summary>
+	/// Trigger that this handle has been grabbed
+	/// </summary>
 	public void SetIsGrabbed ()
 	{
     	if (isLocked) return;
@@ -168,6 +204,9 @@ public class GUIWindowHandle : GUIPointerObject {
 		}
 	}
 
+	/// <summary>
+	/// Show the changed cursor when this handle is highlighted
+	/// </summary>
 	public void ShowCursor ()
 	{
 		if (!isLocked && cursor != null) {
@@ -175,6 +214,9 @@ public class GUIWindowHandle : GUIPointerObject {
 		}
     }
 
+	/// <summary>
+	/// Return the cursor to the default state
+	/// </summary>
 	public void ResetCursor ()
 	{
 		if (cursor != null) {

@@ -1,17 +1,36 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// Script to handle expanding and restoring a window to/from screen size
+/// </summary>
 public class GUIWindowExpander : GUIPointerObject {
 
 	private const float MaxTimeForDoubleClick = 0.5f;
-
+	/// <summary>
+	/// Window to apply expand effect to
+	/// </summary>
+	[Tooltip("")]
 	[SerializeField] private RectTransform parentWindow = null;
+	/// <summary>
+	/// Expander is locked and unusable
+	/// </summary>
+	[Tooltip("")]
 	[SerializeField] private bool isLocked = false;
+	/// <summary>
+	/// Allows you to double click this target image to minimise/maximise
+	/// </summary>
 	[Tooltip("Allows you to double click this target image to minimise/maximise")]
 	[SerializeField] private bool doubleClick = true;
-	[SerializeField] private UnityEvent onMinimised = null;
-	[SerializeField] private UnityEvent onMaximised = null;
+	/// <summary>
+	/// Fires when window starts restoring to a smaller size
+	/// </summary>
+	public UnityEvent onMinimised = null;
+	/// <summary>
+	/// Fires when window starts expanding
+	/// </summary>
+	public UnityEvent onMaximised = null;
+
 	private bool isMaximised = false;
 	private bool doAction = false;
 
@@ -22,8 +41,6 @@ public class GUIWindowExpander : GUIPointerObject {
 	private Vector2 initialPivot = Vector2.one * -1;
 
 	private Vector2 targetPosition;
-	private Vector2 targetMinAnchor;
-	private Vector2 targetMaxAnchor;
 	private Vector2 targetSize;
 
 	private int numClicks;
@@ -60,10 +77,17 @@ public class GUIWindowExpander : GUIPointerObject {
 		}
 	}
 
+	/// <summary>
+	/// Toggle interactivity of expander
+	/// </summary>
+	/// <param name="input">is interactive</param>
 	public void SetIsLocked(bool input) {
 		isLocked = input;
 	}
 
+	/// <summary>
+	/// Set window to fill screen
+	/// </summary>
 	public void MaximiseWindow () {
 		if (isLocked) return;
 
@@ -82,6 +106,9 @@ public class GUIWindowExpander : GUIPointerObject {
 		doAction = true;
 	}
 
+	/// <summary>
+	/// Set window to small size
+	/// </summary>
 	public void MinimiseWindow() {
 		if (isLocked) return;
 		parentWindow.anchorMin = initialMinAnchor;
@@ -100,6 +127,9 @@ public class GUIWindowExpander : GUIPointerObject {
 		doAction = true;
 	}
 
+	/// <summary>
+	/// Do a click for attempting to expand by double click
+	/// </summary>
 	public void TryDoubleClick () {
 		if (isLocked || !doubleClick) return;
 		numClicks++;
@@ -110,6 +140,9 @@ public class GUIWindowExpander : GUIPointerObject {
 		}
 	}
 
+	/// <summary>
+	/// Swap between minimised and maximised
+	/// </summary>
 	public void Swap () {
 		if (isMaximised) {
 			MinimiseWindow ();

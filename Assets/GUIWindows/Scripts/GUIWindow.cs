@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
+/// <summary>
+/// Simple script to destroy the target GameObject when window is closed
+/// </summary>
 public class GUIWindow : MonoBehaviour {
+	/// <summary>
+	/// Close window by destroying this GameObject
+	/// </summary>
 	public void CloseWindow () {
 		Destroy(gameObject);
 	}

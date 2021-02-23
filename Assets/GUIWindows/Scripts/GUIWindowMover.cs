@@ -1,12 +1,26 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// Script to handle moving windows
+/// </summary>
 public class GUIWindowMover : GUIPointerObject {
-
+	/// <summary>
+	/// Window to move
+	/// </summary>
+	[Tooltip("Window to move")]
 	[SerializeField] private RectTransform parentWindow = null;
+	/// <summary>
+	/// Mover is locked and unusable
+	/// </summary>
+	[Tooltip("Mover is locked and unusable")]
 	[SerializeField] private bool isLocked = false;
+	/// <summary>
+	/// Fires when a window has been moved
+	/// </summary>
+	[Tooltip("Fires when a window has been moved")]
 	[SerializeField] private UnityEvent onWindowMoved = null;
+
 	private Vector2 mouseOffset;
 	private bool isGrabbed = false;
 
@@ -27,11 +41,18 @@ public class GUIWindowMover : GUIPointerObject {
 		}
 	}
 
+	/// <summary>
+	/// Toggle interactivity of handle
+	/// </summary>
+	/// <param name="input">is interactive</param>
 	public void SetIsLocked(bool input) {
 		isLocked = input;
 		isGrabbed = false;
 	}
 
+	/// <summary>
+	/// Trigger that window has started to be moved
+	/// </summary>
 	public void SetIsGrabbed () {
 		mouseOffset = parentWindow.position - Input.mousePosition;
 		isGrabbed = true;
